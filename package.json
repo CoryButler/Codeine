@@ -1,0 +1,32 @@
+{
+  "name": "codeine",
+  "version": "2.0.0",
+  "description": "useless, purposefully archaic, interpreted language",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack --watch & live-server --port=8085"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CorySButler/Codeine.git"
+  },
+  "keywords": [
+    "codeine"
+  ],
+  "author": "Cory Butler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CorySButler/Codeine/issues"
+  },
+  "homepage": "https://github.com/CorySButler/Codeine#readme"
+}
