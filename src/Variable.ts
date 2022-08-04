@@ -1,17 +1,21 @@
-export class Variable {
+export default class Variable {
     public readonly key: string;
-    private value: number;
+    private value: number|string;
 
     constructor(key: string, value: number = 0) {
         this.key = key;
         this.value = value;
     }
 
-    get(): number {
-        return this.value;
+    public get(): number {
+        return this.value as number;
     }
 
-    set(value: number): void {
+    public getString(): string {
+        return this.value as string;
+    }
+
+    public set(value: number): void {
         this.value = value;
     }
 }

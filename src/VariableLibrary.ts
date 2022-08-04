@@ -1,38 +1,51 @@
-import { Variable } from "./Variable";
+import Interpreter from "./interpreter";
+import Logger from "./logger";
+import Variable from "./variable";
 
-export class VariableLibrary {
-    private _variables: Array<Variable>;
-    
-    constructor() {
-        this._variables = [];
+export default class VariableLibrary {
+    private static _instance: VariableLibrary;
+    private static _tempFlag;
+    private static _variables: Array<Variable> = [];
+
+    constructor() {}
+
+    public clear(): void {
+        VariableLibrary._variables = [];
     }
 
-    add(key: string, value: number): void {
-        const variable = this._variables.find(variable => variable.key === key);
-        if (variable) console.error(`add() - "${key}" is already defined.`);
-        else this._variables.push(new Variable(key, value));
+    public static getInstance(): VariableLibrary {
+        if (!VariableLibrary._instance)
+            VariableLibrary._instance = new VariableLibrary();
+
+        return VariableLibrary._instance;
     }
 
-    get(key: string): Variable {
-        console.log("e");
-        if (parseFloat(key)) return new Variable("__temp__", parseFloat(key));
-        console.log("f");
-        const variable = this._variables.find(variable => variable.key === key);
-        console.log("g");
+    public add(key: string, value: number): void {
+        if (key === VariableLibrary._tempFlag) return;
+        if (this.findVar(key)) Logger.log(`LINE ${Interpreter.lineNumber}: add() - "${key}" is already defined.`);
+        else VariableLibrary._variables.push(new Variable(key, value));
+    }
+
+    private findVar(key: string): Variable {
+        return VariableLibrary._variables.find(variable => variable.key === key);
+    }
+
+    public get(key: string): Variable {
+        if (parseFloat(key)) return new Variable(VariableLibrary._tempFlag, parseFloat(key));        
+        const variable = this.findVar(key);
         if (variable) return variable;
-        else console.error(`get() - "${key}" does not exist.`);
-        return new Variable("__error__", 0);
+        return new Variable(key, 0);
     }
 
-    remove(key: string): void {
-        const index = this._variables.findIndex(variable => variable.key === key);
-        if (index >= 0) this._variables.splice(index, 1);
-        else console.error(`remove() - "${key}" does not exist.`);
+    public remove(key: string): void {
+        const index = VariableLibrary._variables.findIndex(variable => variable.key === key);
+        if (index >= 0) VariableLibrary._variables.splice(index, 1);
+        else Logger.log(`LINE ${Interpreter.lineNumber}: remove() - "${key}" does not exist.`);
     }
 
-    set(key: string, value: number): void {
-        const index = this._variables.findIndex(variable => variable.key === key);
-        if (index >= 0) this._variables[index].set(value);
-        else console.error(`set() - "${key}" does not exist.`);
+    public set(key: string, value: number): void {
+        const variable = this.findVar(key);
+        if (variable) variable.set(value);
+        else Logger.log(`LINE ${Interpreter.lineNumber}: set() - "${key}" does not exist.`);
     }
 }

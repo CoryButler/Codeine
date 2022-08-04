@@ -1,3 +1,5 @@
-import { Interpreter } from "./interpreter";
+import "./extensions/implementations";
+import Interpreter from "./interpreter";
 
-window.onload = () => new Interpreter().run("+ 1 2;");
+//@ts-ignore
+document.getElementById("runButton").onclick = () => { Interpreter.run(document.getElementById('code').value); };
