@@ -7,6 +7,7 @@ export default class Divide implements Operation {
     readonly description: string = "divide";
     readonly example: string = "/ my_var 12; (divides my_var by 12)";
     execute(args: Array<Variable>): void {
+        //TODO: check or Infinity or args[1].get() = 0
         VariableLibrary.getInstance().set(args[0].key, args[0].get() / args[1].get());
     }
 }

@@ -2,7 +2,7 @@ import Add from "./add";
 import Assign from "./assign";
 import Deallocate from "./deallocate";
 import Define from "./define";
-import Divide from "./define";
+import Divide from "./divide";
 import Log from "./log";
 import Loop from "./loop";
 import Modulo from "./modulo";
@@ -25,5 +25,7 @@ const operationsDictionary: Array<any> = [
     { key: new SquareRoot().key, op: SquareRoot},
     { key: new Subtract().key, op: Subtract }
 ];
+
+console.log(operationsDictionary);
 
 export default operationsDictionary;
