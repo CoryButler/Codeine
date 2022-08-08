@@ -2,22 +2,24 @@ import "./extensions/implementations";
 import Logger from "./logger";
 import Statement from "./statement";
 import VariableLibrary from "./variableLibrary";
+import { resetOperationsDictionary } from "./operations/operationsDictionary";
 
 export default abstract class Interpreter {
     public static lineNumber: number;
 
     public static run(code: string): void {
-        this.lineNumber = 0;
+        this.lineNumber = 1;
         VariableLibrary.getInstance().clear();
+        resetOperationsDictionary();
         Logger.clear();
         this.parseCode(code).forEach(line => {
-            if (line.trim() !== "" && !line.trim().startsWith("~")) new Statement(line).run();
+            new Statement(line).run();
         });
     }
 
     private static parseCode(code: string): Array<string> {
         //@ts-ignore
-        const lines = code.split("\n").join("").split(";");
+        const lines = code.replaceAll(";", "").replaceAll("\n", ";").split(";");
 
         const toRemove: Array<number> = [];
 
@@ -40,7 +42,6 @@ export default abstract class Interpreter {
             lines.splice(toRemove[i], 1);
         }
 
-        //@ts-ignore
         return lines;
     }
 }

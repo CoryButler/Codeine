@@ -2,12 +2,17 @@ import Variable from "../variable";
 import Operation from "./operation";
 import Statement from "../statement";
 import Interpreter from "../interpreter";
+import Logger from "../logger";
+import { setTempOperationsDictionary, resetOperationsDictionary } from "./operationsDictionary";
 
 export default class Loop implements Operation {
     readonly key: string = "&";
     readonly description: string = "divide";
     readonly example: string = "& 4 {\n...\n}; (runs statements on lines between braces 4 times)";
     execute(args: Array<Variable>): void {
+        if (!args[0]) { Logger.log(`LINE ${Interpreter.lineNumber}: no loop limit set.`); return; }
+        if (!args[1]) { Logger.log(`LINE ${Interpreter.lineNumber}: no loop operations set.`); return; }
+        setTempOperationsDictionary();
         const code: string = args[1].key;
         //@ts-ignore
         const lines = code.split("\n").join("").split(code.splitFlag).join(" ").split(",");
@@ -15,9 +20,10 @@ export default class Loop implements Operation {
             Interpreter.lineNumber -= (lines.length - 1) * (i > 0 ? 1 : 0);
             lines.forEach(line => {
                 //@ts-ignore
-                if (line.trim() !== "" && !line.trim().startsWith("~")) new Statement(line.replaceAll("#", i)).run();
+                if (line.trim() !== "") new Statement(line.trim().replaceAll("#", i.toString())).run();
             });
         }
-        Interpreter.lineNumber++;
+        resetOperationsDictionary();
+        Interpreter.lineNumber++; /* TODO */
     }
 }

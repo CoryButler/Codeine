@@ -1,4 +1,5 @@
 declare interface String {
-    replaceAll(search, replacement): string;
+    parseFloatStrict(str: string): number;
+    replaceAll(search: string, replacement: string): string;
     splitFlag: string;
 }

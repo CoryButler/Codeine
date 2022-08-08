@@ -1,7 +1,7 @@
 import Interpreter from "./interpreter";
 import Logger from "./logger";
 import Operation from "./operations/operation";
-import operationsDictionary from "./operations/operationsRecord";
+import { operationsDictionary } from "./operations/operationsDictionary";
 import Variable from "./variable";
 import VariableLibrary from "./variableLibrary";
 
@@ -28,11 +28,15 @@ export default class Statement {
     }
 
     public run() {
-        Interpreter.lineNumber++;
         if (this._operation) {
             this._operation.execute(this._args);
         }
-        else
-            Logger.log(`LINE ${Interpreter.lineNumber}: "${this._elements[0]}" is an invalid operation.`)
+        else if (this._elements[0].trim() !== "") {
+            Logger.log(`LINE ${Interpreter.lineNumber}: "${this._elements[0]}" is an invalid operation.`);
+        } else if (this._elements[0].trim() === "") {
+            //Interpreter.lineNumber--;
+        }
+
+        Interpreter.lineNumber++;
     }
 }

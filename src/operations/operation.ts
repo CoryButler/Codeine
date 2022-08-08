@@ -1,8 +1,8 @@
 import Variable from "../variable";
 
-export default interface Operation {
+export default abstract class Operation {
     readonly key: string;
     readonly description: string;
     readonly example: string;
-    execute(args: Array<Variable>): void;
+    execute(args: Array<Variable>): void {};
 }

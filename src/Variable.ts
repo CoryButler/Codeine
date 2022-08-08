@@ -16,6 +16,7 @@ export default class Variable {
     }
 
     public set(value: number): void {
+        if (this.value === null) return;
         this.value = value;
     }
 }

@@ -4,13 +4,15 @@ import Variable from "./variable";
 
 export default class VariableLibrary {
     private static _instance: VariableLibrary;
-    private static _tempFlag;
+    public static readonly _tempFlag: string ="__temp__";
     private static _variables: Array<Variable> = [];
 
-    constructor() {}
+    constructor() {
+        this.clear();
+    }
 
     public clear(): void {
-        VariableLibrary._variables = [];
+        VariableLibrary._variables = [new Variable(VariableLibrary._tempFlag, null)];
     }
 
     public static getInstance(): VariableLibrary {
@@ -31,7 +33,9 @@ export default class VariableLibrary {
     }
 
     public get(key: string): Variable {
-        if (parseFloat(key)) return new Variable(VariableLibrary._tempFlag, parseFloat(key));        
+        //@ts-ignore
+        if (!isNaN(key.parseFloatStrict())) return new Variable(VariableLibrary._tempFlag, key.parseFloatStrict());
+        if (key === VariableLibrary._tempFlag) return new Variable(VariableLibrary._tempFlag, 0);
         const variable = this.findVar(key);
         if (variable) return variable;
         return new Variable(key, 0);
