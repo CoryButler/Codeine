@@ -1,7 +1,7 @@
 import Interpreter from "./interpreter";
 import Logger from "./logger";
 import Operation from "./operations/operation";
-import { operationsDictionary } from "./operations/operationsDictionary";
+import OperationsDictionary from "./operations/operationsDictionary";
 import Variable from "./variable";
 import VariableLibrary from "./variableLibrary";
 
@@ -17,7 +17,7 @@ export default class Statement {
     }
 
     private parse() {
-        const operationObject = operationsDictionary.find(opDict => opDict.key === this._elements[0]);
+        const operationObject = OperationsDictionary.getInstance().find(this._elements[0]);
         if (operationObject)
             this._operation = operationObject.op.prototype;
             

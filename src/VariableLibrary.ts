@@ -6,6 +6,7 @@ export default class VariableLibrary {
     private static _instance: VariableLibrary;
     public static readonly _tempFlag: string ="__temp__";
     private static _variables: Array<Variable> = [];
+    private static _tempVariables: Array<Variable> = []
 
     constructor() {
         this.clear();
@@ -29,7 +30,7 @@ export default class VariableLibrary {
     }
 
     private findVar(key: string): Variable {
-        return VariableLibrary._variables.find(variable => variable.key === key);
+        return VariableLibrary._variables.slice().find(variable => variable.key === key);
     }
 
     public get(key: string): Variable {
@@ -42,7 +43,7 @@ export default class VariableLibrary {
     }
 
     public remove(key: string): void {
-        const index = VariableLibrary._variables.findIndex(variable => variable.key === key);
+        const index = VariableLibrary._variables.slice().findIndex(variable => variable.key === key);
         if (index >= 0) VariableLibrary._variables.splice(index, 1);
         else Logger.log(`LINE ${Interpreter.lineNumber}: remove() - "${key}" does not exist.`);
     }
@@ -51,5 +52,13 @@ export default class VariableLibrary {
         const variable = this.findVar(key);
         if (variable) variable.set(value);
         else Logger.log(`LINE ${Interpreter.lineNumber}: set() - "${key}" does not exist.`);
+    }
+
+    public setTemp() {
+        VariableLibrary._tempVariables = VariableLibrary._variables.slice();
+    }
+
+    public resetFromTemp() {
+        VariableLibrary._variables = VariableLibrary._tempVariables.slice();
     }
 }

@@ -2,7 +2,7 @@ import "./extensions/implementations";
 import Logger from "./logger";
 import Statement from "./statement";
 import VariableLibrary from "./variableLibrary";
-import { resetOperationsDictionary } from "./operations/operationsDictionary";
+import OperationsDictionary from "./operations/operationsDictionary";
 
 export default abstract class Interpreter {
     public static lineNumber: number;
@@ -10,7 +10,7 @@ export default abstract class Interpreter {
     public static run(code: string): void {
         this.lineNumber = 1;
         VariableLibrary.getInstance().clear();
-        resetOperationsDictionary();
+        OperationsDictionary.getInstance().clear();
         Logger.clear();
         this.parseCode(code).forEach(line => {
             new Statement(line).run();
@@ -37,6 +37,7 @@ export default abstract class Interpreter {
                 lines[i] = lines[i].substring(0, lines[i].indexOf("{")) + f;
             }
         }
+
 
         for (let i = toRemove.length - 1; i >= 0; i--) {
             lines.splice(toRemove[i], 1);
