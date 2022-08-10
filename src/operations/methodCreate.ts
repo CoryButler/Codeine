@@ -9,7 +9,7 @@ import OperationsDictionary from "./operationsDictionary";
 export default class MethodCreate implements Operation {
     readonly key: string = ">";
     readonly description: string = "custom method";
-    readonly example: string = "> my_method {\n...\n}; (runs statements on lines between braces when using my_method as a command)";
+    readonly example: string = "> my_method {\n...\n}; (runs statements on lines between braces when using my_method as a command; use # to access the argument)";
     execute(args: Array<Variable>): void {
         if (!args[0]) { Logger.log(`LINE ${Interpreter.lineNumber}: no method name set.`); return; }
         if (!args[1]) { Logger.log(`LINE ${Interpreter.lineNumber}: no method operations set.`); return; }
@@ -38,7 +38,7 @@ export default class MethodCreate implements Operation {
                 const tempLineNumber = Interpreter.lineNumber + 1;
                 const code: string = args[1].key;
                 //@ts-ignore
-                const lines = code.replaceAll("#", argsLocal[0].key).split(",");
+                const lines = code.replaceAll("#", argsLocal[0].get()).split(",");
                 lines.forEach((line, i) => {
                     Interpreter.lineNumber = ++currentLineNumber;
                     if (line.trim().startsWith(">")) { Logger.log(`LINE ${Interpreter.lineNumber}: cannot define a method within a method.`); }

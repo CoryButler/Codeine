@@ -9,7 +9,7 @@ import VariableLibrary from "../variableLibrary";
 export default class Loop implements Operation {
     readonly key: string = "&";
     readonly description: string = "divide";
-    readonly example: string = "& 4 {\n...\n}; (runs statements on lines between braces 4 times)";
+    readonly example: string = "& 4 {\n...\n}; (runs statements on lines between braces 4 times; use # to access index)";
     execute(args: Array<Variable>): void {
         if (!args[0]) { Logger.log(`LINE ${Interpreter.lineNumber}: no loop limit set.`); return; }
         if (!args[1]) { Logger.log(`LINE ${Interpreter.lineNumber}: no loop operations set.`); return; }

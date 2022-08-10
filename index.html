@@ -34,26 +34,26 @@
         <p>IDE:</p>
         <div style="margin: 10px; float: left">
             <p>Code:</p>
-            <textarea id="code" rows="20" cols="20" autofocus>
-~ Change a decimal to a percent;
+            <textarea id="code" rows="20" cols="20" spellcheck="false" autofocus>
+~ Change a decimal to a percent
 
-~ decimal value;
-@ dec 0.88;
+~ decimal value
+@ dec 0.88
 
-~ percent value;
-@ r_perc 0;
+~ percent value
+@ r_perc 0
 
-~ Decimal to percent function;
+~ Decimal to percent function
 > toPerc {
-= r_perc #0;
-* r_perc 100;
+= r_perc #
+* r_perc 100
 }
 
-~ run function;
-toPerc dec;
+~ run function
+toPerc dec
 
-~ log the results;
-< r_perc;
+~ log the results
+< r_perc
             </textarea>
         </div>
         <button id="runButton" style="margin: 10px; float: left; vertical-align: middle">RUN CODE</button>
