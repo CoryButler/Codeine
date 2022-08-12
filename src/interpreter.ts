@@ -7,7 +7,13 @@ import OperationsDictionary from "./operations/operationsDictionary";
 export default abstract class Interpreter {
     public static lineNumber: number;
 
-    public static run(code: string): void {
+    public static getOperations(): Array<any> {
+        return OperationsDictionary.getInstance().dictionary();
+    }
+
+    public static run(code: string): string {
+        if (!code || !code[0] || code.trim() === "") return;
+
         this.lineNumber = 1;
         VariableLibrary.getInstance().clear();
         OperationsDictionary.getInstance().clear();
@@ -15,6 +21,7 @@ export default abstract class Interpreter {
         this.parseCode(code).forEach(line => {
             new Statement(line).run();
         });
+        return Logger.getLog();
     }
 
     private static parseCode(code: string): Array<string> {

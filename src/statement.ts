@@ -11,7 +11,11 @@ export default class Statement {
     private _args: Array<Variable>;
 
     constructor(code: string) {
-        this._elements = code.split(" ");
+        while (code.includes("  ")) {
+            //@ts-ignore
+            code = code.replaceAll("  ", " ");
+        }
+        this._elements = code.trim().split(" ");
         this._args = [];
         this.parse();
     }

@@ -7,7 +7,7 @@ import Operation from "./operation";
 export default class Assign implements Operation {
     readonly key: string = "=";
     readonly description: string = "assign";
-    readonly example: string = "= my_var 12; (sets my_var to 12)";
+    readonly example: string = "= my_var 12 — sets my_var to 12";
     execute(args: Array<Variable>): void {
         if (!args[0]) { Logger.log(`LINE ${Interpreter.lineNumber}: no variable set for assignment.`); return; }
         if (!args[1]) { Logger.log(`LINE ${Interpreter.lineNumber}: no assignment value set.`); return; }

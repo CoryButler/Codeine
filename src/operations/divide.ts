@@ -7,7 +7,7 @@ import Operation from "./operation";
 export default class Divide implements Operation {
     readonly key: string = "/";
     readonly description: string = "divide";
-    readonly example: string = "/ my_var 12; (divides my_var by 12)";
+    readonly example: string = "/ my_var 12 — divides my_var by 12";
     execute(args: Array<Variable>): void {
         if (!args[0]) { Logger.log(`LINE ${Interpreter.lineNumber}: no variable set as dividend.`); return; }
         if (!args[1]) { Logger.log(`LINE ${Interpreter.lineNumber}: no variable set as divisor.`); return; }

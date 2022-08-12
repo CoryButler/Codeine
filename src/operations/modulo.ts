@@ -7,7 +7,7 @@ import Operation from "./operation";
 export default class Modulo implements Operation {
     readonly key: string = "%";
     readonly description: string = "module";
-    readonly example: string = "% my_var 3; (sets my_var to itself modulo 3)";
+    readonly example: string = "% my_var 3 — sets my_var to itself modulo 3";
     execute(args: Array<Variable>): void {
         if (!args[0]) { Logger.log(`LINE ${Interpreter.lineNumber}: no variable set as modulo dividend.`); return; }
         if (!args[1]) { Logger.log(`LINE ${Interpreter.lineNumber}: no variable set as modulo divisor.`); return; }

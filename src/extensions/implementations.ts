@@ -1,7 +1,7 @@
 //@ts-ignore
 String.prototype.parseFloatStrict = function (this: string): number {
     for (let i = 0; i < this.length; i++) {
-        if (isNaN(parseFloat(this[i])) && this[i] !== ".") return NaN;
+        if (isNaN(parseFloat(this[i])) && this[i] !== "." && this[i] !== "-") return NaN;
     }
     return parseFloat(this);
 }

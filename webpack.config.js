@@ -1,6 +1,6 @@
 const path = require('path');
 module.exports = {
-  entry: './src/main.ts',
+  entry: './src/interpreter.ts',
   module: {
     rules: [
       {
@@ -14,8 +14,12 @@ module.exports = {
     extensions: [ '.ts', '.tsx', '.js' ]
   },
   output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: "Codeine.js",
+    library: {
+      name: "Codeine",
+      type: 'umd',
+      export: 'default'
+    }
   },
   mode: 'production'
 };

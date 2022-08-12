@@ -1,4 +1,3 @@
-import "./extensions/implementations";
 import Interpreter from "./interpreter";
 
 //@ts-ignore

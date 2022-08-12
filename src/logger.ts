@@ -1,13 +1,15 @@
 export default abstract class Logger {
+    private static _log: string = "";
+
     public static clear(): void {
-        document.getElementById("log").innerHTML = "";
+        this._log = "";
     }
 
     public static log(str: any): void {
-        document.getElementById("log").innerHTML += str + "\n\n";
+        this._log += str + "\n\n";
     }
 
-    public static logToConsole(str: any): void {
-        console.log(str);
+    public static getLog(): string {
+        return this._log;
     }
 }

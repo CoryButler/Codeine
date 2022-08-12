@@ -7,7 +7,7 @@ import Operation from "./operation";
 export default class Add implements Operation {
     readonly key: string = "+";
     readonly description: string = "add";
-    readonly example: string = "+ my_var 12; (adds 12 to my_var)";
+    readonly example: string = "+ my_var 12 — adds 12 to my_var";
     execute(args: Array<Variable>): void {
         if (!args[0]) { Logger.log(`LINE ${Interpreter.lineNumber}: no variable set as accumulator.`); return; }
         if (!args[1]) { Logger.log(`LINE ${Interpreter.lineNumber}: no variable set as addend.`); return; }
