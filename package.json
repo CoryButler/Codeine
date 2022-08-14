@@ -1,7 +1,7 @@
 {
   "name": "codeine",
   "version": "2.0.0",
-  "description": "useless, purposefully archaic, interpreted language",
+  "description": "my own purposefully archaic, interpreted language",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
@@ -18,15 +18,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CorySButler/Codeine.git"
+    "url": "git+https://github.com/CoryButler/Codeine.git"
   },
   "keywords": [
-    "codeine"
+    "codeine",
+    "codeine_ide"
   ],
   "author": "Cory Butler",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CorySButler/Codeine/issues"
+    "url": "https://github.com/CoryButler/Codeine/issues"
   },
-  "homepage": "https://github.com/CorySButler/Codeine#readme"
+  "homepage": "https://github.com/CoryButler/Codeine#readme"
 }
